@@ -11,6 +11,15 @@ public class WebDriverSettings {
 
     @Before
     public void setUp() {
+        checkOS();
+
+
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    }
+
+    private void checkOS() {
         String property = System.getProperty("os.name");
         switch (property) {
             case ("Linux"):
@@ -25,11 +34,6 @@ public class WebDriverSettings {
             case ("Other"):
                 break;
         }
-
-
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     @After
