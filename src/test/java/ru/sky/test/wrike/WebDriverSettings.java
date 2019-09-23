@@ -11,10 +11,25 @@ public class WebDriverSettings {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\1\\chromedriver.exe");
+        String property = System.getProperty("os.name");
+        switch (property) {
+            case ("Linux"):
+                System.setProperty("webdriver.chrome.driver", "chromedriver");
+                break;
+            case ("Windows"):
+                System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+                break;
+            case ("MacOS"):
+                System.setProperty("webdriver.chrome.driver", "chromedrivermac");
+                break;
+            case ("Other"):
+                break;
+        }
+
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     @After
